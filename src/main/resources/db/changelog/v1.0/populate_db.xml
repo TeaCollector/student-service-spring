@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.10.xsd">
+
+    <changeSet id="5-populate-lesson" author="Alexandr Sergeev">
+        <insert tableName="lesson">
+            <column name="lesson_name" value="physic">
+            </column>
+        </insert>
+
+        <insert tableName="lesson">
+            <column name="lesson_name" value="mathematics">
+            </column>
+        </insert>
+
+        <insert tableName="lesson">
+            <column name="lesson_name" value="rus">
+            </column>
+        </insert>
+
+        <insert tableName="lesson">
+            <column name="lesson_name" value="literature">
+            </column>
+        </insert>
+
+        <insert tableName="lesson">
+            <column name="lesson_name" value="geometry">
+            </column>
+        </insert>
+
+        <insert tableName="lesson">
+            <column name="lesson_name" value="informatics">
+            </column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="5-populate-class" author="Alexandr Sergeev">
+        <insert tableName="class">
+            <column name="class_number" value="1">
+            </column>
+        </insert>
+        <insert tableName="class">
+            <column name="class_number" value="2">
+            </column>
+        </insert>
+        <insert tableName="class">
+            <column name="class_number" value="3">
+            </column>
+        </insert>
+        <insert tableName="class">
+            <column name="class_number" value="4">
+            </column>
+        </insert>
+        <insert tableName="class">
+            <column name="class_number" value="5">
+            </column>
+        </insert>
+        <insert tableName="class">
+            <column name="class_number" value="6">
+            </column>
+        </insert>
+        <insert tableName="class">
+            <column name="class_number" value="7">
+            </column>
+        </insert>
+        <insert tableName="class">
+            <column name="class_number" value="8">
+            </column>
+        </insert>
+        <insert tableName="class">
+            <column name="class_number" value="9">
+            </column>
+        </insert>
+        <insert tableName="class">
+            <column name="class_number" value="10">
+            </column>
+        </insert>
+        <insert tableName="class">
+            <column name="class_number" value="11">
+            </column>
+        </insert>
+        <insert tableName="class">
+            <column name="class_number" value="12">
+            </column>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

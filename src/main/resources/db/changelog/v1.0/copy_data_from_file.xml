@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.10.xsd">
+
+    <changeSet id="6-copy-data-from-file" author="Alexandr Sergeev">
+
+        <sqlFile path="/sql_scripts/create_function.sql"
+                 relativeToChangelogFile="true"
+                 encoding="utf8"
+                 endDelimiter="\GO"
+                 stripComments="false"
+                 splitStatements="false"/>
+
+        <sqlFile
+                path="/sql_scripts/create_trigger.sql"
+                relativeToChangelogFile="true"
+                endDelimiter="\GO"
+                stripComments="false"
+                splitStatements="false"
+                encoding="UTF8"/>
+    </changeSet>
+
+</databaseChangeLog>

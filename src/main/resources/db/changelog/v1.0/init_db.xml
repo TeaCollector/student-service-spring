@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.10.xsd">
+
+    <changeSet id="1-create-table-person_progress" author="Alexandr Sergeev">
+        <createTable tableName="student_progress">
+            <column name="sp_id" type="SERIAL">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="physic" type="smallint" defaultValue="-1">
+            </column>
+            <column name="mathematics" type="smallint" defaultValue="-1">
+            </column>
+            <column name="rus" type="smallint" defaultValue="-1">
+            </column>
+            <column name="literature" type="smallint" defaultValue="-1">
+            </column>
+            <column name="geometry" type="smallint" defaultValue="-1">
+            </column>
+            <column name="informatics" type="smallint" defaultValue="-1">
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2-create-table-class" author="Alexandr Sergeev">
+        <createTable tableName="class">
+            <column name="class_id" type="SERIAL">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="class_number" type="smallint" defaultValue="-1">
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="3-create-table-lesson" author="Alexandr Sergeev">
+        <createTable tableName="lesson">
+            <column name="lesson_id" type="SERIAL">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="lesson_name" type="VARCHAR(30)" defaultValue="null">
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="4-create-student-table" author="Alexandr Sergeev">
+        <createTable tableName="student">
+            <column name="student_id" type="SERIAL">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="VARCHAR(35)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="age" type="SMALLINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="class_id" type="BIGINT">
+                <constraints referencedTableName="class"
+                             referencedColumnNames="class_id"
+                             foreignKeyName="class_id_fk"/>
+            </column>
+            <column name="sp_id" type="SERIAL">
+                <constraints referencedTableName="student_progress"
+                             referencedColumnNames="sp_id"
+                             foreignKeyName="sp_id_fk"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

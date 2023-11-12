@@ -4,11 +4,13 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @NoArgsConstructor
-@Entity(name = "student_progress")
+@Entity(name = "StudentProgress")
 @Table(name = "student_progress")
-public class StudentProgress {
+public class StudentProgress implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -5,11 +5,10 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
-import ru.coffee.studentservicespring.domain.model.Classroom;
 
 @Getter
 @Setter
-public class StudentDtoToChangeScore {
+public class StudentDtoToChangeMark {
     @NotBlank
     String name;
     @NotBlank
@@ -20,5 +19,4 @@ public class StudentDtoToChangeScore {
     int classroom;
     @Min(1) @Max(5)
     int score;
-
 }

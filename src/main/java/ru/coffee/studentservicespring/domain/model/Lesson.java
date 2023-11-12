@@ -2,9 +2,11 @@ package ru.coffee.studentservicespring.domain.model;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name = "lesson")
-public class Lesson {
+public class Lesson implements Serializable {
 
     @Id
     @Column(name = "lesson_id")

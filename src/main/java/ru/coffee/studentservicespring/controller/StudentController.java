@@ -5,8 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.coffee.studentservicespring.domain.dto.StudentDtoForAdding;
 import ru.coffee.studentservicespring.domain.dto.StudentDtoWithAverageScore;
-import ru.coffee.studentservicespring.domain.dto.StudentDtoToChangeScore;
-import ru.coffee.studentservicespring.domain.model.Student;
+import ru.coffee.studentservicespring.domain.dto.StudentDtoToChangeMark;
 import ru.coffee.studentservicespring.service.StudentService;
 
 import java.util.List;
@@ -21,23 +20,28 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    @GetMapping
-    public ResponseEntity<List<StudentDtoWithAverageScore>> getStudentWithAverage(@RequestParam(name = "class") int classroom) {
-        List<StudentDtoWithAverageScore> listStudents = studentService.getAverageScore(classroom);
+    @GetMapping("class/{class}/avg_marks")
+    public ResponseEntity<List<Object>> getStudentWithAverage(@PathVariable(name = "class")
+                                                                                      int classroom) {
+        List<Object> listStudents = studentService.getAverageScore(classroom);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(listStudents);
     }
 
-    @PutMapping
-    public ResponseEntity<String> changeScore(@RequestBody StudentDtoToChangeScore studentDto) {
+    @PutMapping("change_mark")
+    public ResponseEntity<StudentDtoToChangeMark> changeScore(@RequestBody StudentDtoToChangeMark studentDto) {
         studentService.changeScore(studentDto);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Update");
+        return ResponseEntity
+                .status(HttpStatus.NO_CONTENT)
+                .body(studentDto);
     }
 
-    @PostMapping
-    public ResponseEntity<String> addStudent(@RequestBody StudentDtoForAdding student) {
+    @PostMapping("add")
+    public ResponseEntity<StudentDtoForAdding> addStudent(@RequestBody StudentDtoForAdding student) {
         studentService.addStudent(student);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(student);
     }
 }

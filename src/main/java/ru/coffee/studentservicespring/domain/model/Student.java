@@ -4,11 +4,13 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @NoArgsConstructor
-@Entity
+@Entity(name = "Student")
 @Table(name = "student")
-public class Student {
+public class Student implements Serializable {
 
     @Id
     @Column(name = "student_id")
@@ -17,18 +19,18 @@ public class Student {
 
     @Column(name = "name")
     private String name;
+
     @Column(name = "last_name")
     private String lastName;
+
     @Column(name = "age")
     private int age;
 
-    @PrimaryKeyJoinColumn
-    @OneToOne(cascade = CascadeType.ALL)
-    @Transient
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "class_id")
     private Classroom classroom;
 
-    @PrimaryKeyJoinColumn
     @OneToOne
+    @PrimaryKeyJoinColumn
     private StudentProgress sp;
-
 }

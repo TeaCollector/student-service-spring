@@ -58,9 +58,10 @@
             <column name="age" type="SMALLINT">
                 <constraints nullable="false"/>
             </column>
-            <column name="class_id" type="BIGINT">
-                <constraints referencedTableName="class"
+            <column name="class_id" type="SMALLINT">
+                <constraints nullable="false"
                              referencedColumnNames="class_id"
+                             referencedTableName="class"
                              foreignKeyName="class_id_fk"/>
             </column>
             <column name="sp_id" type="SERIAL">

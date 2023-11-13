@@ -64,7 +64,7 @@
                              referencedTableName="class"
                              foreignKeyName="class_id_fk"/>
             </column>
-            <column name="sp_id" type="SERIAL">
+            <column name="sp_id" type="BIGINT">
                 <constraints referencedTableName="student_progress"
                              referencedColumnNames="sp_id"
                              foreignKeyName="sp_id_fk"/>

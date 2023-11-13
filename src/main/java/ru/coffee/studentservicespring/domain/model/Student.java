@@ -26,11 +26,11 @@ public class Student implements Serializable {
     @Column(name = "age")
     private int age;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "class_id")
     private Classroom classroom;
 
-    @OneToOne
-    @PrimaryKeyJoinColumn
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JoinColumn(name = "sp_id")
     private StudentProgress sp;
 }

@@ -6,21 +6,15 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import ru.coffee.studentservicespring.domain.dto.StudentDtoWithAverageScore;
 import ru.coffee.studentservicespring.domain.model.Student;
-import ru.coffee.studentservicespring.domain.model.StudentProgress;
 
 import java.util.List;
 
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Long>, CommandWithStudentRepository {
-    @Query("from Student")
-    List<Student> getAllStudents();
 
-    @Query("select s.name as name, s.lastName as lastName, s.classroom.classroom as classroom, " +
-           "(sp.geometry + sp.informatics + sp.literature + sp.rus + sp.mathematics + sp.physic) / 6 as average " +
+    @Query("select new ru.coffee.studentservicespring.domain.dto.StudentDtoWithAverageScore (s.name , s.lastName , s.classroom.classroom, " +
+           "(sp.geometry + sp.informatics + sp.literature + sp.rus + sp.mathematics + sp.physic) / 6) " +
            "from Student s join StudentProgress sp on s.sp.id = sp.id where s.classroom.classroom = :classroom")
-    List<Object> getAverageMarkOfStudents(@Param("classroom") int classroom);
-
-//    @Query("update sp set :lesson = :score from Stude", )
-//    void changeMark(@Param("lesson") String lesson, @Param("score") int score, );
+    List<StudentDtoWithAverageScore> getAverageMarkOfStudents(@Param("classroom") int classroom);
 
 }

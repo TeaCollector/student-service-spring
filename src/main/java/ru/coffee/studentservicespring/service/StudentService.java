@@ -11,7 +11,7 @@ public interface StudentService {
 
     void addStudent(StudentDtoForAdding student);
 
-    List<Object> getAverageScore(int classroom);
+    List<StudentDtoWithAverageScore> getAverageScore(int classroom);
 
     StudentDtoToChangeMark changeScore(StudentDtoToChangeMark student);
 

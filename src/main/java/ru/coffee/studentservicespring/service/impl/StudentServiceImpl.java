@@ -15,7 +15,6 @@ import ru.coffee.studentservicespring.repository.StudentRepository;
 import ru.coffee.studentservicespring.repository.StudentProgressRepository;
 import ru.coffee.studentservicespring.service.StudentService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -41,27 +40,15 @@ public class StudentServiceImpl implements StudentService {
     public void addStudent(StudentDtoForAdding student) {
         Student st = mapper.studentDtoToStudent(student);
         Classroom classroom = classroomRepository.getReferenceById((long) st.getClassroom().getClassroom());
+        StudentProgress studentProgress = studentProgressRepository.save(new StudentProgress());
         st.setClassroom(classroom);
-        studentProgressRepository.save(new StudentProgress());
+        st.setSp(studentProgress);
         studentRepository.save(st);
     }
 
     @Override
-    public List<Object> getAverageScore(int classroom) {
+    public List<StudentDtoWithAverageScore> getAverageScore(int classroom) {
         return studentRepository.getAverageMarkOfStudents(classroom);
-//        log.info("what that: {}", averageMarkOfStudents.get(0).getClass().getSimpleName());
-//
-//        Object[] str = (Object[]) averageMarkOfStudents.get(0);
-//        log.info("what that: {}", str);
-//
-//        List<StudentDtoWithAverageScore> listStudentDtoWithAverageScores = new ArrayList<>();
-//        for (Object obj : averageMarkOfStudents) {
-//            log.info("Just Object: {}", obj);
-//            StudentDtoWithAverageScore studentDtoWithAverageScore = mapper.objToStudentDtoWithAverageScore(obj);
-//            log.info("Student DTO: {}", studentDtoWithAverageScore.toString());
-//            listStudentDtoWithAverageScores.add(studentDtoWithAverageScore);
-//        }
-//        return listStudentDtoWithAverageScores;
     }
 
     @Transactional

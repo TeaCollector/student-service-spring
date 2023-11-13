@@ -3,6 +3,8 @@ package ru.coffee.studentservicespring.initdb;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import ru.coffee.studentservicespring.domain.model.Classroom;
 import ru.coffee.studentservicespring.domain.model.Student;
@@ -29,7 +31,7 @@ public class PopulateDB {
     }
 
 //    @EventListener(ApplicationReadyEvent.class)
-    public List<Student> csvToStudent() {
+    public void populateDbFromCSV() {
         try (BufferedReader fileReader = new BufferedReader(new FileReader("src/main/resources/students.csv"));
              CSVParser csvParser = CSVParser.parse(fileReader, CSVFormat.Builder
                      .create()
@@ -41,6 +43,7 @@ public class PopulateDB {
             List<Student> studentList = new ArrayList<>();
             List<StudentProgress> studentProgressList = new ArrayList<>();
 
+            long id = 0;
 
             for (CSVRecord csvRecord : csvParser) {
 
@@ -48,17 +51,22 @@ public class PopulateDB {
                 student.setName(csvRecord.get("name"));
                 student.setLastName(csvRecord.get("family"));
                 student.setAge(Integer.parseInt(csvRecord.get("age")));
+
                 Classroom classroom = new Classroom();
                 classroom.setClassroom(Integer.parseInt(csvRecord.get("group")));
+                classroom.setId(Long.parseLong(csvRecord.get("group")));
                 student.setClassroom(classroom);
 
                 StudentProgress studentProgress = new StudentProgress();
+                studentProgress.setId(++id);
                 studentProgress.setGeometry(Integer.parseInt(csvRecord.get("geometry")));
                 studentProgress.setInformatics(Integer.parseInt(csvRecord.get("informatics")));
                 studentProgress.setLiterature(Integer.parseInt(csvRecord.get("literature")));
                 studentProgress.setPhysic(Integer.parseInt(csvRecord.get("physics")));
                 studentProgress.setMathematics(Integer.parseInt(csvRecord.get("mathematics")));
                 studentProgress.setRus(Integer.parseInt(csvRecord.get("rus")));
+
+                student.setSp(studentProgress);
 
                 studentProgressList.add(studentProgress);
                 studentList.add(student);
@@ -67,7 +75,6 @@ public class PopulateDB {
             studentProgressRepository.saveAll(studentProgressList);
             studentRepository.saveAll(studentList);
 
-            return studentList;
         } catch (IOException ioe) {
             throw new RuntimeException("fail to parse CSV file: " + ioe.getMessage());
         }

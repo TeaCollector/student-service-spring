@@ -21,15 +21,15 @@ public class StudentController {
     }
 
     @GetMapping("class/{class}/avg_marks")
-    public ResponseEntity<List<Object>> getStudentWithAverage(@PathVariable(name = "class")
+    public ResponseEntity<List<StudentDtoWithAverageScore>> getStudentWithAverage(@PathVariable(name = "class")
                                                                                       int classroom) {
-        List<Object> listStudents = studentService.getAverageScore(classroom);
+        List<StudentDtoWithAverageScore> listStudents = studentService.getAverageScore(classroom);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(listStudents);
     }
 
-    @PutMapping("change_mark")
+    @PatchMapping("change_mark")
     public ResponseEntity<StudentDtoToChangeMark> changeScore(@RequestBody StudentDtoToChangeMark studentDto) {
         studentService.changeScore(studentDto);
         return ResponseEntity

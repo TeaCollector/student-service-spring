@@ -17,5 +17,5 @@ public class StudentDtoForAdding {
     @Min(6)
     int age;
     @Min(1) @Max(12)
-    Classroom classroom;
+    int classroom;
 }

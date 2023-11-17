@@ -17,14 +17,13 @@ import ru.coffee.studentservicespring.service.StudentService;
 
 import java.util.List;
 
-@Slf4j
 @Service
 public class StudentServiceImpl implements StudentService {
 
-    private ClassroomRepository classroomRepository;
-    private StudentProgressRepository studentProgressRepository;
-    private StudentRepository studentRepository;
-    private StudentMapper mapper;
+    private final ClassroomRepository classroomRepository;
+    private final StudentProgressRepository studentProgressRepository;
+    private final StudentRepository studentRepository;
+    private final StudentMapper mapper;
 
     public StudentServiceImpl(ClassroomRepository classroomRepository, StudentProgressRepository studentProgressRepository,
                               StudentRepository studentRepository,

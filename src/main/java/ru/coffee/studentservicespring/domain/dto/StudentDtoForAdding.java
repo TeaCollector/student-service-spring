@@ -5,10 +5,12 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import ru.coffee.studentservicespring.domain.model.Classroom;
 
 @Setter
 @Getter
+@ToString
 public class StudentDtoForAdding {
     @NotBlank
     String name;

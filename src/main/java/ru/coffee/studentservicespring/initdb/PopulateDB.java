@@ -30,7 +30,7 @@ public class PopulateDB {
         this.studentRepository = studentRepository;
     }
 
-//    @EventListener(ApplicationReadyEvent.class)
+    @EventListener(ApplicationReadyEvent.class)
     public void populateDbFromCSV() {
         try (BufferedReader fileReader = new BufferedReader(new FileReader("src/main/resources/students.csv"));
              CSVParser csvParser = CSVParser.parse(fileReader, CSVFormat.Builder
